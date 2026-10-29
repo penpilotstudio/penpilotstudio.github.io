@@ -445,7 +445,45 @@
       font-size: 12px; font-weight: 700;
       padding: 5px 12px; border-radius: 999px;
     }
-    .price-note { max-width: 720px; margin: 32px auto 0; text-align: center; color: var(--muted); font-size: 15px; }
+    .price-card .checklist li.extra { color: var(--ink); font-weight: 600; }
+    .price-card .checklist li.extra svg { color: var(--accent-dark); }
+    .price-breakdown {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 32px;
+      align-items: center;
+      margin-top: 40px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 32px;
+    }
+    .price-breakdown h3 { margin: 0 0 16px; font-size: 20px; color: var(--ink); }
+    .calc { list-style: none; margin: 0; padding: 0; }
+    .calc li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px dashed #d5dae6; font-size: 15px; }
+    .calc li span { color: var(--muted); }
+    .calc li strong { color: var(--ink); text-align: right; }
+    .calc li strong.free { color: var(--ok); }
+    .price-note { margin: 16px 0 0; color: var(--muted); font-size: 14px; }
+    .calc-box { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; text-align: center; box-shadow: var(--shadow); }
+    .calc-box label { display: block; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+    .calc-box input {
+      width: 120px;
+      font: 700 24px/1 Inter, sans-serif;
+      text-align: center;
+      color: var(--ink);
+      padding: 10px;
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .calc-box input:focus { border-color: var(--accent); }
+    .calc-label { margin: 18px 0 2px; color: var(--muted); font-size: 14px; }
+    .calc-out { margin: 0; font-size: 40px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; line-height: 1.1; }
+    .calc-out.bump { animation: bump .3s; }
+    .calc-hint { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+    @keyframes bump { 50% { transform: scale(1.08); color: var(--accent-dark); } }
     /* Animations (only when JS is on, so content is never hidden without it) */
     .site-header { transition: box-shadow .3s; }
     .site-header.scrolled { box-shadow: 0 8px 24px rgba(0, 0, 0, .18); }
@@ -617,6 +655,7 @@
       .section-head h2, .order-info h2 { font-size: 28px; }
       .why { grid-template-columns: 1fr; }
       .price-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; gap: 28px; }
+      .price-breakdown { grid-template-columns: 1fr; padding: 24px 18px; max-width: 440px; margin: 32px auto 0; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
       .footer-brand { grid-column: 1 / -1; }
       .cta-band { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
@@ -800,7 +839,8 @@
             <h3>Handwritten notes & fair copies</h3>
             <p class="price">₹20 <small>/ page</small></p>
             <ul class="checklist">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pen included · register at actual cost</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pen included – no extra charge</li>
+              <li class="extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Register – extra, at actual cost</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Headings, margins and page numbers</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Blue or black ink – your choice</li>
             </ul>
@@ -811,7 +851,8 @@
             <h3>Practical files & lab records</h3>
             <p class="price">₹20 <small>/ page</small></p>
             <ul class="checklist">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>File + sheets or register at actual cost</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pen included – no extra charge</li>
+              <li class="extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>File + loose sheets – extra, at actual cost</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Index, tables and labelled diagrams</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Your college format followed</li>
             </ul>
@@ -828,7 +869,25 @@
             <a class="btn btn-wa" data-order href="#" target="_blank" rel="noopener">Get a quote</a>
           </div>
         </div>
-        <p class="price-note">Delivered to your home, hostel or college – wherever you tell us, anywhere in India. Delivery charge depends on location. Urgent orders may cost extra. Final price is confirmed on WhatsApp before you pay.</p>
+        <div class="price-breakdown">
+          <div>
+            <h3>How your total is worked out</h3>
+            <ul class="calc">
+              <li><span>Writing</span><strong>₹20 × pages</strong></li>
+              <li><span>Pen</span><strong class="free">No charge</strong></li>
+              <li><span>Register, or file + loose sheets</span><strong>Actual shop price</strong></li>
+              <li><span>Delivery to home, hostel or college</span><strong>As per location</strong></li>
+            </ul>
+            <p class="price-note">Urgent orders may cost extra. We tell you the exact total on WhatsApp before you pay – no hidden charges.</p>
+          </div>
+          <div class="calc-box">
+            <label for="calcPages">How many pages?</label>
+            <input id="calcPages" type="number" min="1" max="999" value="30" inputmode="numeric">
+            <p class="calc-label">Writing cost</p>
+            <p class="calc-out" id="calcOut">₹600</p>
+            <p class="calc-hint">+ register or file (actual price) + delivery</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1112,6 +1171,22 @@
         'हाथ से लिखी प्रैक्टिकल फाइल, लैब रिकॉर्ड, नोट्स और फेयर कॉपी – आपके कंटेंट से साफ़ लिखाई में, पूरे भारत में डिलीवरी।',
       'Chat on WhatsApp': 'WhatsApp पर बात करें',
       'Quick links': 'ज़रूरी लिंक',
+      'Pen included – no extra charge': 'पेन शामिल – कोई एक्स्ट्रा चार्ज नहीं',
+      'Register – extra, at actual cost': 'रजिस्टर – अलग से, असली कीमत पर',
+      'File + loose sheets – extra, at actual cost': 'फाइल + अलग पेज – अलग से, असली कीमत पर',
+      'How your total is worked out': 'आपका कुल खर्च कैसे बनता है',
+      'Writing': 'लिखाई',
+      '₹20 × pages': '₹20 × पेज',
+      'Pen': 'पेन',
+      'No charge': 'कोई चार्ज नहीं',
+      'Register, or file + loose sheets': 'रजिस्टर, या फाइल + अलग पेज',
+      'Actual shop price': 'दुकान की असली कीमत',
+      'Delivery to home, hostel or college': 'घर, हॉस्टल या कॉलेज पर डिलीवरी',
+      'As per location': 'जगह के हिसाब से',
+      'Urgent orders may cost extra. We tell you the exact total on WhatsApp before you pay – no hidden charges.': 'जल्दी वाले ऑर्डर का चार्ज थोड़ा ज़्यादा हो सकता है। पेमेंट से पहले WhatsApp पर पूरा खर्च बता देते हैं – कोई छिपा चार्ज नहीं।',
+      'How many pages?': 'कितने पेज?',
+      'Writing cost': 'लिखाई का खर्च',
+      '+ register or file (actual price) + delivery': '+ रजिस्टर या फाइल (असली कीमत) + डिलीवरी',
       '₹20 per page': '₹20 प्रति पेज',
       'Pen included, register/file by us at cost': 'पेन शामिल, रजिस्टर/फाइल असली कीमत पर',
       'Home, hostel or college delivery': 'घर, हॉस्टल या कॉलेज पर डिलीवरी',
@@ -1195,6 +1270,17 @@
     document.addEventListener('click', e => { if (!e.target.closest('.site-header')) setMenu(false); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
+    // Pricing calculator: writing cost = pages × ₹20
+    const calcIn = document.getElementById('calcPages');
+    const calcOut = document.getElementById('calcOut');
+    calcIn.addEventListener('input', () => {
+      const pages = Math.max(0, Math.min(999, parseInt(calcIn.value, 10) || 0));
+      calcOut.textContent = '₹' + (pages * 20).toLocaleString('en-IN');
+      calcOut.classList.remove('bump');
+      calcOut.offsetWidth; // restart the bump animation
+      calcOut.classList.add('bump');
+    });
+
     // Header shadow once the page is scrolled
     const header = document.querySelector('.site-header');
     const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 10);
@@ -1203,7 +1289,7 @@
 
     // Reveal blocks as they scroll into view (siblings appear one after another)
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const targets = document.querySelectorAll('.section-head, .grid-4 > *, .courses, .cta-band, .steps > *, .price-card, .price-note, .why > *, .order-info, .order-card, .faq details, .footer-grid > *');
+      const targets = document.querySelectorAll('.section-head, .grid-4 > *, .courses, .cta-band, .steps > *, .price-card, .price-breakdown, .why > *, .order-info, .order-card, .faq details, .footer-grid > *');
       targets.forEach(el => {
         const siblings = [...el.parentElement.children].filter(c => c.matches('.grid-4 > *, .steps > *, .price-card, .why > *, .faq details, .footer-grid > *'));
         const i = siblings.indexOf(el);
