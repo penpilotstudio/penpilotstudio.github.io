@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PenPilot Studio – Neat handwritten fair copies, notes & practical files</title>
-  <meta name="description" content="Send photos of your notes, drafts or practical content. We rewrite them as neat, legible handwritten pages, formatted and delivered on the agreed date.">
+  <title>Handwritten Practical Files, Notes & Fair Copies in India | PenPilot Studio</title>
+  <meta name="description" content="Handwritten practical files, lab records, notes and fair copies made from your own content. Real pen on paper, your college format followed, delivery across India. Free quote on WhatsApp.">
   <meta name="theme-color" content="#14213d">
   <meta name="robots" content="index, follow">
   <meta name="msvalidate.01" content="3D3AA10A6235990635B11C3C139BFB47">
@@ -14,8 +14,9 @@
   <link rel="apple-touch-icon" href="favicon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PenPilot Studio">
-  <meta property="og:title" content="PenPilot Studio – Neat handwritten fair copies, notes & practical files">
-  <meta property="og:description" content="Send photos of your notes, drafts or practical content. We rewrite them as neat, legible handwritten pages, formatted and delivered on the agreed date.">
+  <meta property="og:title" content="Handwritten Practical Files, Notes & Fair Copies | PenPilot Studio">
+  <meta property="og:description" content="Send photos of your notes or practical content on WhatsApp. We write them neatly by hand – practical files, lab records, notes and fair copies, delivered across India.">
+  <meta property="og:locale" content="en_IN">
   <meta property="og:url" content="https://penpilotstudio.github.io/">
   <meta property="og:image" content="https://penpilotstudio.github.io/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -29,10 +30,30 @@
     "url": "https://penpilotstudio.github.io/",
     "logo": "https://penpilotstudio.github.io/favicon.png",
     "image": "https://penpilotstudio.github.io/og-image.png",
-    "description": "Handwriting, fair copy and formatting services for notes, practical files and project files, based on content provided by the customer.",
+    "description": "Handwritten practical files, lab records, notes, fair copies and project files, written by hand from content provided by the customer. Orders and quotes on WhatsApp, delivery across India.",
     "telephone": "+91-8630351527",
-    "areaServed": "IN",
-    "availableLanguage": ["English", "Hindi"]
+    "areaServed": { "@type": "Country", "name": "India" },
+    "availableLanguage": ["English", "Hindi"],
+    "knowsAbout": ["Handwritten practical files", "Lab records", "Handwritten notes", "Fair copy writing", "Project file formatting"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Handwriting services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Handwritten fair copies", "description": "Neat handwritten fair copies of content the customer provides, page-numbered and well presented." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Practical files & lab records", "description": "Lab records written by hand from the customer's own observations and readings, with index, tables and labelled diagrams." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Handwritten notes", "description": "Messy class notes rewritten by hand into clean, readable notebooks." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Project files & PPTs", "description": "Formatting and design for project files and presentations, using the customer's content." } }
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PenPilot Studio",
+    "url": "https://penpilotstudio.github.io/",
+    "inLanguage": ["en-IN", "hi-IN"]
   }
   </script>
   <script type="application/ld+json">
@@ -40,6 +61,38 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is it real handwriting or a handwriting font?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Real handwriting. Every page is written by hand with a pen on paper – no fonts and no printouts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you make practical files and lab records?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Send photos of your experiment list, observations and readings, plus a sample page if your college follows a fixed format. We write the record with index, tables and labelled diagrams."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you deliver outside my city?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Scanned copies can be sent on WhatsApp anywhere, and physical pages can be couriered to your address in India. We confirm courier details with the quote."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How fast can you deliver?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on the page count and diagrams. Tell us your deadline and we'll confirm the delivery date before you pay."
+        }
+      },
       {
         "@type": "Question",
         "name": "How is the price decided?",
@@ -280,6 +333,9 @@
       display: grid; place-items: center;
     }
     .icon svg { width: 24px; height: 24px; }
+    .courses { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin: 32px 0 0; font-size: 15px; color: var(--muted); }
+    .courses strong { color: var(--ink); margin-right: 4px; }
+    .courses span { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 14px; }
 
     /* Steps */
     .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
@@ -475,8 +531,8 @@
     <section class="hero">
       <div class="wrap">
         <div>
-          <h1>Your work, written <span class="hand">neatly by hand.</span></h1>
-          <p class="lead">Send photos of your notes, drafts or practical content. We rewrite them in clean, legible handwriting, neatly formatted and delivered on the agreed date.</p>
+          <h1>Practical files & notes, <span class="hand">written neatly by hand.</span></h1>
+          <p class="lead">Send photos of your notes, drafts or practical content on WhatsApp. We write them by hand as practical files, lab records, notes and fair copies – real pen on paper, neatly formatted and delivered on the agreed date.</p>
           <div class="hero-cta">
             <a class="btn btn-wa" data-order href="#" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
@@ -488,6 +544,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free quote, no advance</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pay after quote</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>On-time delivery</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Delivery across India</li>
           </ul>
         </div>
 
@@ -516,25 +573,26 @@
         <div class="grid-4">
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-            <h3>Fair copies</h3>
+            <h3>Handwritten fair copies</h3>
             <p>Neat handwritten fair copies of content you provide, page-numbered and well presented.</p>
           </div>
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><line x1="7" y1="15" x2="17" y2="15"/></svg></div>
-            <h3>Practical files</h3>
+            <h3>Practical files & lab records</h3>
             <p>Lab records written from your own observations and readings, with index, tables and labelled diagrams.</p>
           </div>
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-            <h3>Notes</h3>
+            <h3>Handwritten notes</h3>
             <p>Messy class notes rewritten into clean, readable notebooks you'll actually want to revise from.</p>
           </div>
           <div class="card">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-            <h3>Projects & PPTs</h3>
+            <h3>Project files & PPTs</h3>
             <p>Formatting and design for project files and presentations, using your content.</p>
           </div>
         </div>
+        <p class="courses"><strong>Practical files for:</strong> <span>B.Sc</span> <span>B.Pharm</span> <span>D.Pharm</span> <span>Nursing</span> <span>Polytechnic</span> <span>Engineering</span> <span>Class 11–12</span></p>
       </div>
     </section>
 
@@ -632,6 +690,22 @@
         </div>
         <div class="faq">
           <details>
+            <summary>Is it real handwriting or a handwriting font?</summary>
+            <div class="faq-body"><p>Real handwriting. Every page is written by hand with a pen on paper – no fonts and no printouts.</p></div>
+          </details>
+          <details>
+            <summary>Do you make practical files and lab records?</summary>
+            <div class="faq-body"><p>Yes. Send photos of your experiment list, observations and readings, plus a sample page if your college follows a fixed format. We write the record with index, tables and labelled diagrams.</p></div>
+          </details>
+          <details>
+            <summary>Do you deliver outside my city?</summary>
+            <div class="faq-body"><p>Yes. Scanned copies can be sent on WhatsApp anywhere, and physical pages can be couriered to your address in India. We confirm courier details with the quote.</p></div>
+          </details>
+          <details>
+            <summary>How fast can you deliver?</summary>
+            <div class="faq-body"><p>It depends on the page count and diagrams. Tell us your deadline and we'll confirm the delivery date before you pay.</p></div>
+          </details>
+          <details>
             <summary>How is the price decided?</summary>
             <div class="faq-body"><p>Pricing depends on the number of pages, diagrams and how soon you need it. Send us photos of your task on WhatsApp and we'll reply with an exact quote.</p></div>
           </details>
@@ -687,10 +761,25 @@
       'How it works': 'कैसे काम करता है',
       'FAQ': 'सवाल-जवाब',
       'Place an order': 'ऑर्डर करें',
-      'Your work, written': 'आपका काम,',
-      'neatly by hand.': 'साफ़ हाथ की लिखाई में।',
-      'Send photos of your notes, drafts or practical content. We rewrite them in clean, legible handwriting, neatly formatted and delivered on the agreed date.':
-        'अपने नोट्स, ड्राफ्ट या प्रैक्टिकल कंटेंट की फोटो भेजें। हम उसे साफ़ और पढ़ने लायक लिखाई में, अच्छी फॉर्मेटिंग के साथ दोबारा लिखकर तय तारीख पर देते हैं।',
+      'Practical files & notes,': 'प्रैक्टिकल फाइल और नोट्स,',
+      'written neatly by hand.': 'साफ़ हाथ की लिखाई में।',
+      'Send photos of your notes, drafts or practical content on WhatsApp. We write them by hand as practical files, lab records, notes and fair copies – real pen on paper, neatly formatted and delivered on the agreed date.':
+        'अपने नोट्स, ड्राफ्ट या प्रैक्टिकल कंटेंट की फोटो WhatsApp पर भेजें। हम उन्हें हाथ से प्रैक्टिकल फाइल, लैब रिकॉर्ड, नोट्स और फेयर कॉपी के रूप में लिखते हैं – असली पेन और कागज़ पर, अच्छी फॉर्मेटिंग के साथ, तय तारीख पर।',
+      'Delivery across India': 'पूरे भारत में डिलीवरी',
+      'Practical files for:': 'इनकी प्रैक्टिकल फाइल:',
+      'Class 11–12': 'कक्षा 11–12',
+      'Is it real handwriting or a handwriting font?': 'क्या ये असली हाथ की लिखाई है या कोई फॉन्ट?',
+      'Real handwriting. Every page is written by hand with a pen on paper – no fonts and no printouts.':
+        'असली हाथ की लिखाई। हर पेज पेन से कागज़ पर हाथ से लिखा जाता है – न कोई फॉन्ट, न प्रिंटआउट।',
+      'Do you make practical files and lab records?': 'क्या आप प्रैक्टिकल फाइल और लैब रिकॉर्ड बनाते हैं?',
+      'Yes. Send photos of your experiment list, observations and readings, plus a sample page if your college follows a fixed format. We write the record with index, tables and labelled diagrams.':
+        'हाँ। अपनी experiment list, observations और readings की फोटो भेजें, और अगर कॉलेज का फिक्स फॉर्मेट है तो एक सैंपल पेज भी। हम इंडेक्स, टेबल और लेबल वाले डायग्राम के साथ रिकॉर्ड लिखते हैं।',
+      'Do you deliver outside my city?': 'क्या आप मेरे शहर के बाहर भी डिलीवरी करते हैं?',
+      'Yes. Scanned copies can be sent on WhatsApp anywhere, and physical pages can be couriered to your address in India. We confirm courier details with the quote.':
+        'हाँ। स्कैन कॉपी WhatsApp पर कहीं भी भेजी जा सकती है, और असली पेज भारत में आपके पते पर कूरियर किए जा सकते हैं। कूरियर की जानकारी कोटेशन के साथ तय होती है।',
+      'How fast can you deliver?': 'कितनी जल्दी डिलीवरी हो सकती है?',
+      "It depends on the page count and diagrams. Tell us your deadline and we'll confirm the delivery date before you pay.":
+        'यह पेज की संख्या और डायग्राम पर निर्भर करता है। अपनी डेडलाइन बताएं, हम पेमेंट से पहले डिलीवरी की तारीख तय कर देंगे।',
       'Send your task on WhatsApp': 'WhatsApp पर अपना काम भेजें',
       'Free quote, no advance': 'फ्री कोटेशन, कोई एडवांस नहीं',
       'Pay after quote': 'कोटेशन के बाद पेमेंट',
@@ -699,16 +788,16 @@
       'Everything that needs to be written by hand': 'हाथ से लिखा जाने वाला हर काम',
       'From a few pages to a full semester of lab records – you share the content, we turn it into neat, well-presented pages.':
         'कुछ पेज से लेकर पूरे सेमेस्टर की लैब रिकॉर्ड तक – कंटेंट आप दें, हम उसे साफ़ और सुंदर पेज में बदल देंगे।',
-      'Fair copies': 'फेयर कॉपी',
+      'Handwritten fair copies': 'हाथ से लिखी फेयर कॉपी',
       'Neat handwritten fair copies of content you provide, page-numbered and well presented.':
         'आपके दिए कंटेंट की साफ़ हाथ से लिखी फेयर कॉपी, पेज नंबर के साथ।',
-      'Practical files': 'प्रैक्टिकल फाइल',
+      'Practical files & lab records': 'प्रैक्टिकल फाइल और लैब रिकॉर्ड',
       'Lab records written from your own observations and readings, with index, tables and labelled diagrams.':
         'आपकी अपनी observations और readings से लिखी लैब रिकॉर्ड, इंडेक्स, टेबल और लेबल वाले डायग्राम के साथ।',
-      'Notes': 'नोट्स',
+      'Handwritten notes': 'हाथ से लिखे नोट्स',
       "Messy class notes rewritten into clean, readable notebooks you'll actually want to revise from.":
         'बिखरे हुए क्लास नोट्स को साफ़ और पढ़ने लायक कॉपी में दोबारा लिखा जाता है, ताकि रिवीज़न आसान हो।',
-      'Projects & PPTs': 'प्रोजेक्ट और PPT',
+      'Project files & PPTs': 'प्रोजेक्ट फाइल और PPT',
       'Formatting and design for project files and presentations, using your content.':
         'आपके कंटेंट से प्रोजेक्ट फाइल और प्रेज़ेंटेशन की फॉर्मेटिंग और डिज़ाइन।',
       'Four simple steps': 'चार आसान स्टेप',
@@ -777,12 +866,12 @@
 
     const TEXT = {
       en: {
-        title: `${CONFIG.brand} – Neat handwritten fair copies, notes & practical files`,
+        title: `Handwritten Practical Files, Notes & Fair Copies in India | ${CONFIG.brand}`,
         hi: 'Hi',
         order: `Hi ${CONFIG.brand}, I'd like to place an order.\n\nName:\nType of work:\nNeeded by:\nDetails:\n\n(Attaching photos of my task)`
       },
       hi: {
-        title: `${CONFIG.brand} – फेयर कॉपी, नोट्स और प्रैक्टिकल फाइल, साफ़ हाथ की लिखाई में`,
+        title: `हाथ से लिखी प्रैक्टिकल फाइल, नोट्स और फेयर कॉपी | ${CONFIG.brand}`,
         hi: 'नमस्ते',
         order: `नमस्ते ${CONFIG.brand}, मुझे ऑर्डर देना है।\n\nनाम:\nकाम का प्रकार:\nकब तक चाहिए:\nडिटेल्स:\n\n(काम की फोटो साथ में भेज रहे हैं)`
       }
