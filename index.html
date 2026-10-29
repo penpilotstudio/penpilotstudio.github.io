@@ -774,12 +774,19 @@
         body.style.height = opening ? '0px' : full;
         body.offsetHeight; // force reflow so the transition starts from here
         body.style.height = opening ? full : '0px';
-        body.addEventListener('transitionend', () => {
+        const onEnd = e => {
+          if (e.target === body && e.propertyName === 'height') finish();
+        };
+        const timer = setTimeout(() => finish(), 450); // fallback if transitionend never fires
+        function finish() {
+          clearTimeout(timer);
+          body.removeEventListener('transitionend', onEnd);
           if (!opening) item.open = false;
           item.classList.remove('closing');
           body.style.height = '';
           delete item.dataset.busy;
-        }, { once: true });
+        }
+        body.addEventListener('transitionend', onEnd);
       });
     });
 
