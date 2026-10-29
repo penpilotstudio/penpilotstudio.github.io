@@ -266,6 +266,52 @@
     }
     .lang button[aria-pressed="true"] { background: #fff; color: var(--ink); }
     html[lang="hi"] .nav a { font-size: 16px; }
+    /* Mobile menu */
+    .menu-toggle {
+      display: none;
+      position: relative;
+      width: 40px; height: 40px;
+      border: 0; border-radius: 8px;
+      background: rgba(255, 255, 255, .1);
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      position: absolute;
+      left: 11px; right: 11px;
+      height: 2px; border-radius: 2px;
+      background: #fff;
+      transition: transform .3s, opacity .2s, top .3s;
+    }
+    .menu-toggle span:nth-child(1) { top: 13px; }
+    .menu-toggle span:nth-child(2) { top: 19px; }
+    .menu-toggle span:nth-child(3) { top: 25px; }
+    .menu-open .menu-toggle span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+    .menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+    .menu-open .menu-toggle span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: var(--ink);
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, .25);
+      padding: 8px 20px 20px;
+      opacity: 0;
+      transform: translateY(-8px);
+      visibility: hidden;
+      transition: opacity .25s, transform .25s, visibility .25s;
+    }
+    .mobile-menu a:not(.btn) {
+      display: block;
+      padding: 14px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .85);
+      text-decoration: none;
+      font-size: 16px; font-weight: 500;
+    }
+    .mobile-menu a:not(.btn):hover { color: #fff; }
+    .mobile-menu .btn { width: 100%; margin-top: 16px; color: var(--ink); }
+    .menu-open .mobile-menu { opacity: 1; transform: none; visibility: visible; }
 
     /* Hero */
     .hero {
@@ -559,6 +605,8 @@
     }
     @media (max-width: 720px) {
       .nav a:not(.btn) { display: none; }
+      .menu-toggle { display: block; }
+      .mobile-menu { display: block; }
       .nav { gap: 10px; }
       .logo { font-size: 16px; gap: 8px; white-space: nowrap; }
       .nav .btn { padding: 9px 12px; white-space: nowrap; }
@@ -631,8 +679,16 @@
           <button type="button" data-lang="hi" aria-pressed="false">हिं</button>
         </div>
         <a class="btn btn-primary" href="#order">Place an order</a>
+        <button type="button" class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
       </nav>
     </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#order">Place an order</a>
+    </nav>
   </header>
 
   <main id="top">
@@ -1127,6 +1183,17 @@
     document.querySelectorAll('[data-brand]').forEach(el => el.textContent = CONFIG.brand);
     document.querySelectorAll('.logo-mark').forEach(el => el.textContent = CONFIG.brand.charAt(0));
     document.getElementById('year').textContent = new Date().getFullYear();    document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+    // Mobile menu: open / close with the burger button
+    const menuBtn = document.querySelector('.menu-toggle');
+    const setMenu = open => {
+      document.querySelector('.site-header').classList.toggle('menu-open', open);
+      menuBtn.setAttribute('aria-expanded', open);
+    };
+    menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+    document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('click', e => { if (!e.target.closest('.site-header')) setMenu(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
     // Header shadow once the page is scrolled
     const header = document.querySelector('.site-header');
