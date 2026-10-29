@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PenPilot Studio – Neat handwritten fair copies, notes & practical files</title>
+  <meta name="description" content="Send photos of your notes, drafts or practical content. We rewrite them as neat, legible handwritten pages, formatted and delivered on the agreed date.">
+  <meta name="theme-color" content="#14213d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600;700;800&family=Kalam:wght@400;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #14213d;
+      --ink-soft: #2b3a5c;
+      --text: #1b2232;
+      --muted: #5d6680;
+      --bg: #ffffff;
+      --bg-soft: #f5f6fa;
+      --line: #e4e7ef;
+      --accent: #f2a541;
+      --accent-dark: #d98a20;
+      --blue: #2f5bea;
+      --ok: #1f8a4c;
+      --err: #c0392b;
+      --wa: #25d366;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(20, 33, 61, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .section { padding: 88px 0; }
+    .section.soft { background: var(--bg-soft); }
+    .eyebrow {
+      display: inline-block;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 10px;
+    }
+    html[lang="hi"] .eyebrow { font-size: 18px; letter-spacing: 0; }
+    .section-head { max-width: 620px; margin: 0 auto 48px; text-align: center; }
+    .section-head h2 { font-size: 36px; line-height: 1.2; margin: 0 0 12px; color: var(--ink); letter-spacing: -.02em; }
+    .section-head p { color: var(--muted); margin: 0; font-size: 17px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font: 600 16px/1.2 Inter, "Noto Sans Devanagari", sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: var(--ink); box-shadow: 0 6px 18px rgba(242, 165, 65, .35); }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255, 255, 255, .35); }
+    .btn-outline:hover { border-color: #fff; }
+    .btn-wa { background: var(--wa); color: #06351a; }
+    .btn:disabled { opacity: .6; cursor: wait; transform: none; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(20, 33, 61, .96);
+      backdrop-filter: blur(8px);
+      color: #fff;
+    }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; text-decoration: none; color: #fff; }
+    .logo-mark {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: var(--accent); color: var(--ink);
+      display: grid; place-items: center;
+      font: 700 22px/1 Caveat, cursive;
+    }
+    .nav { display: flex; align-items: center; gap: 28px; }
+    .nav a { text-decoration: none; font-size: 15px; font-weight: 500; color: rgba(255, 255, 255, .8); }
+    .nav a:hover { color: #fff; }
+    .nav .btn { padding: 10px 18px; font-size: 14px; color: var(--ink); }
+    .lang {
+      display: flex;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 8px;
+      padding: 3px;
+    }
+    .lang button {
+      border: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, .75);
+      font: 600 13px/1 Inter, "Noto Sans Devanagari", sans-serif;
+      padding: 7px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .lang button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+    html[lang="hi"] .nav a { font-size: 16px; }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(800px 400px at 85% 10%, rgba(47, 91, 234, .35), transparent 60%),
+        linear-gradient(180deg, var(--ink) 0%, #1b2b4f 100%);
+      color: #fff;
+      padding: 80px 0 96px;
+      overflow: hidden;
+    }
+    .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+    .hero h1 { font-size: 52px; line-height: 1.1; margin: 0 0 20px; letter-spacing: -.03em; }
+    html[lang="hi"] .hero h1 { line-height: 1.3; }
+    html[lang="hi"] .hero h1 .hand { font-size: 1em; }
+    .hero h1 .hand { font-family: Caveat, Kalam, cursive; font-weight: 700; color: var(--accent); font-size: 1.2em; letter-spacing: 0; }
+    .hero p.lead { font-size: 19px; color: rgba(255, 255, 255, .78); margin: 0 0 32px; max-width: 540px; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 36px; }
+    .trust { display: flex; flex-wrap: wrap; gap: 10px 24px; padding: 0; margin: 0; list-style: none; font-size: 14px; color: rgba(255, 255, 255, .75); }
+    .trust li { display: flex; align-items: center; gap: 8px; }
+    .trust svg { width: 18px; height: 18px; color: var(--accent); }
+
+    /* Notebook illustration */
+    .notebook {
+      position: relative;
+      background: #fffdf6;
+      border-radius: 6px 16px 16px 6px;
+      padding: 36px 32px 36px 64px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, .35);
+      transform: rotate(2deg);
+      color: #1d3a8a;
+      background-image:
+        linear-gradient(90deg, transparent 46px, #f3a7a7 46px, #f3a7a7 48px, transparent 48px),
+        repeating-linear-gradient(180deg, transparent 0 33px, #cfdcf1 33px 34px);
+      background-position: 0 0, 0 22px;
+    }
+    .notebook::before {
+      content: "";
+      position: absolute;
+      left: 14px; top: 24px; bottom: 24px;
+      width: 12px;
+      background: radial-gradient(circle, var(--ink) 4px, transparent 5px) 0 0 / 12px 34px repeat-y;
+    }
+    .notebook .nb-title { font: 700 30px/34px Caveat, cursive; margin: 0; text-decoration: underline; text-underline-offset: 6px; }
+    .notebook .nb-line { font: 500 24px/34px Caveat, cursive; margin: 0; }
+    .notebook .nb-diagram { display: flex; align-items: center; gap: 14px; height: 68px; }
+    .notebook .nb-diagram svg { height: 60px; width: auto; }
+    .stamp {
+      position: absolute;
+      right: -14px; bottom: 28px;
+      background: var(--ok); color: #fff;
+      font-size: 13px; font-weight: 700;
+      padding: 8px 14px; border-radius: 999px;
+      transform: rotate(-6deg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .25);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .stamp svg { width: 16px; height: 16px; }
+
+    /* Cards */
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .card h3 { font-size: 18px; margin: 16px 0 8px; color: var(--ink); }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .icon {
+      flex: none;
+      width: 48px; height: 48px; border-radius: 12px;
+      background: #eef2fd; color: var(--blue);
+      display: grid; place-items: center;
+    }
+    .icon svg { width: 24px; height: 24px; }
+
+    /* Steps */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
+    .step { position: relative; padding-top: 8px; }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: grid; place-items: center;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--ink); color: #fff;
+      font-weight: 700; font-size: 17px;
+      margin-bottom: 16px;
+    }
+    .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 30px; left: 60px; right: -12px;
+      border-top: 2px dashed var(--line);
+    }
+    .step h3 { font-size: 18px; margin: 0 0 6px; color: var(--ink); }
+    .step p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* Why us */
+    .why { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .why .card { display: flex; gap: 18px; align-items: flex-start; }
+    .why .card h3 { margin-top: 0; }
+
+    /* Order */
+    .order-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .order-info h2 { font-size: 36px; line-height: 1.2; margin: 0 0 14px; color: var(--ink); letter-spacing: -.02em; }
+    .order-info p { color: var(--muted); font-size: 17px; margin: 0 0 24px; }
+    .checklist { list-style: none; padding: 0; margin: 0; }
+    .checklist li { display: flex; gap: 10px; margin-bottom: 12px; font-size: 15px; }
+    .checklist svg { width: 20px; height: 20px; color: var(--ok); flex: none; margin-top: 2px; }
+    .order-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .order-card h3 { font-size: 20px; margin: 0 0 8px; color: var(--ink); }
+    .wa-list { margin: 0 0 24px; padding: 0; list-style: none; counter-reset: item; }
+    .wa-list li {
+      counter-increment: item;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+    }
+    .wa-list li:last-child { border-bottom: 0; }
+    .wa-list li::before {
+      content: counter(item);
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #e8f9ee; color: #128c4a;
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 13px; flex: none;
+    }
+    .order-card .btn-wa { width: 100%; padding: 16px; font-size: 17px; }
+    .fine { color: var(--muted); font-size: 13px; margin: 14px 0 0; text-align: center; }
+
+    /* FAQ */
+    .faq { max-width: 760px; margin: 0 auto; }
+    .faq details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      padding: 0 22px;
+    }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 0;
+      font-weight: 600;
+      color: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--muted); transition: transform .2s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { margin: 0 0 20px; color: var(--muted); }
+
+    /* CTA band */
+    .cta-band { background: var(--ink); color: #fff; border-radius: 20px; padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .cta-band h2 { margin: 0 0 6px; font-size: 28px; }
+    .cta-band p { margin: 0; color: rgba(255, 255, 255, .75); }
+
+    /* Footer */
+    .site-footer { padding: 40px 0; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+    .site-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .site-footer a { text-decoration: none; }
+    .site-footer a:hover { color: var(--ink); }
+    .site-footer .disclaimer { flex-basis: 100%; margin: 12px 0 0; font-size: 12px; line-height: 1.6; }
+
+    /* Floating WhatsApp */
+    .wa-float {
+      position: fixed;
+      right: 20px; bottom: 20px;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--wa); color: #fff;
+      display: grid; place-items: center;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
+      z-index: 40;
+    }
+    .wa-float svg { width: 30px; height: 30px; }
+
+    @media (max-width: 960px) {
+      .hero .wrap, .order-wrap { grid-template-columns: 1fr; }
+      .hero .notebook { max-width: 440px; margin: 0 auto; }
+      .grid-4, .steps { grid-template-columns: repeat(2, 1fr); }
+      .step::after { display: none; }
+    }
+    @media (max-width: 720px) {
+      .nav a:not(.btn) { display: none; }
+      .nav { gap: 10px; }
+      .logo { font-size: 16px; gap: 8px; white-space: nowrap; }
+      .nav .btn { padding: 9px 12px; white-space: nowrap; }
+      .section { padding: 64px 0; }
+      .hero { padding: 48px 0 72px; }
+      .hero h1 { font-size: 38px; }
+      .hero p.lead { font-size: 17px; }
+      .section-head h2, .order-info h2 { font-size: 28px; }
+      .why { grid-template-columns: 1fr; }
+      .cta-band { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+      .order-card { padding: 24px 18px; }
+    }
+    @media (max-width: 520px) {
+      .wrap { padding: 0 16px; }
+      .site-header .wrap { height: 60px; }
+      .nav .btn { display: none; }
+      .section { padding: 56px 0; }
+      .section-head { margin-bottom: 32px; }
+      .section-head p { font-size: 16px; }
+      .hero { padding: 40px 0 56px; }
+      .hero .wrap { gap: 40px; }
+      .hero h1 { font-size: 34px; }
+      .hero-cta { margin-bottom: 28px; }
+      .hero-cta .btn { width: 100%; }
+      .notebook { max-width: 320px; padding: 22px 16px 26px 50px; transform: rotate(1.5deg); }
+      .notebook::before { left: 12px; }
+      .notebook .nb-title { font-size: 26px; }
+      .notebook .nb-line { font-size: 20px; }
+      .notebook .nb-diagram { height: 56px; }
+      .notebook .nb-diagram svg { height: 48px; }
+      .stamp { right: 10px; bottom: -14px; font-size: 12px; }
+      .grid-4, .steps { grid-template-columns: 1fr; gap: 12px; }
+      .grid-4 .card { display: grid; grid-template-columns: 48px 1fr; column-gap: 16px; padding: 20px 18px; }
+      .grid-4 .card .icon { grid-row: span 2; }
+      .grid-4 .card h3 { margin: 0 0 4px; }
+      .steps { gap: 20px; }
+      .step { display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; padding-top: 0; }
+      .step::before { grid-row: span 2; margin-bottom: 0; }
+      .why .card { padding: 20px 18px; gap: 14px; }
+      .cta-band h2 { font-size: 24px; }
+      .cta-band .btn { width: 100%; }
+      .faq details { padding: 0 16px; }
+      .faq summary { padding: 16px 0; }
+      .site-footer { padding-bottom: 96px; }
+      .wa-float { width: 52px; height: 52px; right: 16px; bottom: 16px; }
+      .wa-float svg { width: 28px; height: 28px; }
+    }
+    @media (max-width: 360px) {
+      .hero h1 { font-size: 30px; }
+      .logo { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="#top"><span class="logo-mark">P</span><span data-brand>PenPilot Studio</span></a>
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="hi" aria-pressed="false">हिं</button>
+        </div>
+        <a class="btn btn-primary" href="#order">Place an order</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <h1>Your work, written <span class="hand">neatly by hand.</span></h1>
+          <p class="lead">Send photos of your notes, drafts or practical content. We rewrite them in clean, legible handwriting, neatly formatted and delivered on the agreed date.</p>
+          <div class="hero-cta">
+            <a class="btn btn-wa" data-order href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+              Send your task on WhatsApp
+            </a>
+            <a class="btn btn-outline" href="#how">How it works</a>
+          </div>
+          <ul class="trust">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free quote, no advance</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pay after quote</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>On-time delivery</li>
+          </ul>
+        </div>
+
+        <div class="notebook" aria-hidden="true">
+          <p class="nb-title">Experiment No. 4</p>
+          <p class="nb-line">Aim: To verify Ohm's law.</p>
+          <p class="nb-line">Apparatus: Battery, rheostat,</p>
+          <p class="nb-line">ammeter, voltmeter, wires.</p>
+          <div class="nb-diagram">
+            <svg viewBox="0 0 120 60" fill="none" stroke="#1d3a8a" stroke-width="2"><rect x="10" y="10" width="100" height="40" rx="2"/><line x1="45" y1="4" x2="45" y2="16"/><line x1="52" y1="7" x2="52" y2="13"/><circle cx="85" cy="50" r="8" fill="#fffdf6"/><text x="81" y="54" font-size="10" fill="#1d3a8a" stroke="none">A</text><circle cx="10" cy="30" r="8" fill="#fffdf6"/><text x="6" y="34" font-size="10" fill="#1d3a8a" stroke="none">V</text></svg>
+            <span class="nb-line">Fig. 1 – Circuit</span>
+          </div>
+          <p class="nb-line">Result: V / I = constant ✓</p>
+          <span class="stamp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Ready on time</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Services</span>
+          <h2>Everything that needs to be written by hand</h2>
+          <p>From a few pages to a full semester of lab records – you share the content, we turn it into neat, well-presented pages.</p>
+        </div>
+        <div class="grid-4">
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <h3>Fair copies</h3>
+            <p>Neat handwritten fair copies of content you provide, page-numbered and well presented.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><line x1="7" y1="15" x2="17" y2="15"/></svg></div>
+            <h3>Practical files</h3>
+            <p>Lab records written from your own observations and readings, with index, tables and labelled diagrams.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <h3>Notes</h3>
+            <p>Messy class notes rewritten into clean, readable notebooks you'll actually want to revise from.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <h3>Projects & PPTs</h3>
+            <p>Formatting and design for project files and presentations, using your content.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">How it works</span>
+          <h2>Four simple steps</h2>
+          <p>No sign-up, no forms. Everything happens on WhatsApp.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><h3>Send photos</h3><p>WhatsApp us clear photos of your content and any format you want followed.</p></div>
+          <div class="step"><h3>Get a quote</h3><p>We review your task and send you the price on WhatsApp.</p></div>
+          <div class="step"><h3>Make payment</h3><p>Confirm the order with a quick payment. No hidden charges.</p></div>
+          <div class="step"><h3>Receive your work</h3><p>Your pages are delivered on the agreed date.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Why us</span>
+          <h2>Careful work, clear communication</h2>
+        </div>
+        <div class="why">
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+            <div><h3>Clean, legible handwriting</h3><p>Consistent writing, neat margins and properly labelled diagrams on every page.</p></div>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><h3>Deadline first</h3><p>We confirm the delivery date with you before you pay.</p></div>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+            <div><h3>Pay only after a quote</h3><p>Asking for a quote is free. You pay only once you've seen and accepted the price.</p></div>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div><h3>Your files stay private</h3><p>Photos you send are used only to complete your order.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="order">
+      <div class="wrap order-wrap">
+        <div class="order-info">
+          <span class="eyebrow">Place an order</span>
+          <h2>Send your task on WhatsApp</h2>
+          <p>Message us with photos of your task. We'll reply with a quote and a delivery date.</p>
+          <ul class="checklist">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Take photos in good light so every word is readable</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Include a sample page if your college has a fixed format</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Mention page count, pen colour and any diagrams</li>
+          </ul>
+        </div>
+
+        <div class="order-card">
+          <h3>What to send us</h3>
+          <ol class="wa-list">
+            <li>Your name</li>
+            <li>Type of work – fair copy, practical file, notes or project</li>
+            <li>When you need it by</li>
+            <li>Page count, pen colour, diagrams</li>
+            <li>Clear photos of your task</li>
+          </ol>
+          <a class="btn btn-wa" data-order href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            Send on WhatsApp
+          </a>
+          <p class="fine">Free to ask. You'll receive a quote before any payment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">FAQ</span>
+          <h2>Common questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>How is the price decided?</summary>
+            <p>Pricing depends on the number of pages, diagrams and how soon you need it. Send us photos of your task on WhatsApp and we'll reply with an exact quote.</p>
+          </details>
+          <details>
+            <summary>How do I pay?</summary>
+            <p>Once you accept the quote, you make the payment and your order is confirmed. Asking for a quote is completely free.</p>
+          </details>
+          <details>
+            <summary>How will I receive my work?</summary>
+            <p>We'll agree on delivery when we send the quote – scanned copies on WhatsApp, local pickup, or courier to your address.</p>
+          </details>
+          <details>
+            <summary>What if I need changes?</summary>
+            <p>Tell us on WhatsApp. If something doesn't match the instructions you shared, we'll correct it.</p>
+          </details>
+          <details>
+            <summary>Is my information safe?</summary>
+            <p>Your photos and details are used only to complete and deliver your order. We do not sell or publish them.</p>
+          </details>
+          <details>
+            <summary>Do you solve questions or write assignments?</summary>
+            <p>No. We do not solve questions or create original academic work. We only rewrite, format and present content that you provide. You are responsible for making sure your use of our service follows the rules of your school, college or university.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cta-band">
+          <div>
+            <h2>Deadline coming up?</h2>
+            <p>Send your task now and get a quote on WhatsApp.</p>
+          </div>
+          <a class="btn btn-wa" data-order href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>Message us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© <span id="year"></span> <span data-brand>PenPilot Studio</span>. All rights reserved.</span>
+      <a data-wa="Hi" href="#" target="_blank" rel="noopener">WhatsApp: <span id="footerPhone"></span></a>
+      <p class="disclaimer">PenPilot Studio provides handwriting, copying and formatting services for content supplied by the customer. We do not solve questions or produce original academic work. Customers are responsible for following the academic rules of their institution. Users under 18 should order only with the consent of a parent or guardian.</p>
+    </div>
+  </footer>
+
+  <a class="wa-float" data-wa="Hi, I'd like to place an order" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+  </a>
+
+  <script>
+    // ==== Only these 2 values need to change ====
+    const CONFIG = {
+      brand: 'PenPilot Studio',
+      whatsapp: '918630351527'   // with country code, without +
+    };
+    // ============================================
+
+    // Hindi translations, keyed by the English text on the page
+    const HI = {
+      'Services': 'सर्विसेज़',
+      'How it works': 'कैसे काम करता है',
+      'FAQ': 'सवाल-जवाब',
+      'Place an order': 'ऑर्डर करें',
+      'Your work, written': 'आपका काम,',
+      'neatly by hand.': 'साफ़ हाथ की लिखाई में।',
+      'Send photos of your notes, drafts or practical content. We rewrite them in clean, legible handwriting, neatly formatted and delivered on the agreed date.':
+        'अपने नोट्स, ड्राफ्ट या प्रैक्टिकल कंटेंट की फोटो भेजें। हम उसे साफ़ और पढ़ने लायक लिखाई में, अच्छी फॉर्मेटिंग के साथ दोबारा लिखकर तय तारीख पर देते हैं।',
+      'Send your task on WhatsApp': 'WhatsApp पर अपना काम भेजें',
+      'Free quote, no advance': 'फ्री कोटेशन, कोई एडवांस नहीं',
+      'Pay after quote': 'कोटेशन के बाद पेमेंट',
+      'On-time delivery': 'समय पर डिलीवरी',
+      'Ready on time': 'समय पर तैयार',
+      'Everything that needs to be written by hand': 'हाथ से लिखा जाने वाला हर काम',
+      'From a few pages to a full semester of lab records – you share the content, we turn it into neat, well-presented pages.':
+        'कुछ पेज से लेकर पूरे सेमेस्टर की लैब रिकॉर्ड तक – कंटेंट आप दें, हम उसे साफ़ और सुंदर पेज में बदल देंगे।',
+      'Fair copies': 'फेयर कॉपी',
+      'Neat handwritten fair copies of content you provide, page-numbered and well presented.':
+        'आपके दिए कंटेंट की साफ़ हाथ से लिखी फेयर कॉपी, पेज नंबर के साथ।',
+      'Practical files': 'प्रैक्टिकल फाइल',
+      'Lab records written from your own observations and readings, with index, tables and labelled diagrams.':
+        'आपकी अपनी observations और readings से लिखी लैब रिकॉर्ड, इंडेक्स, टेबल और लेबल वाले डायग्राम के साथ।',
+      'Notes': 'नोट्स',
+      "Messy class notes rewritten into clean, readable notebooks you'll actually want to revise from.":
+        'बिखरे हुए क्लास नोट्स को साफ़ और पढ़ने लायक कॉपी में दोबारा लिखा जाता है, ताकि रिवीज़न आसान हो।',
+      'Projects & PPTs': 'प्रोजेक्ट और PPT',
+      'Formatting and design for project files and presentations, using your content.':
+        'आपके कंटेंट से प्रोजेक्ट फाइल और प्रेज़ेंटेशन की फॉर्मेटिंग और डिज़ाइन।',
+      'Four simple steps': 'चार आसान स्टेप',
+      'No sign-up, no forms. Everything happens on WhatsApp.': 'न साइन-अप, न फॉर्म। सब कुछ WhatsApp पर।',
+      'Send photos': 'फोटो भेजें',
+      'WhatsApp us clear photos of your content and any format you want followed.':
+        'WhatsApp पर अपने कंटेंट और फॉर्मेट की साफ़ फोटो भेजें।',
+      'Get a quote': 'कोटेशन पाएं',
+      'We review your task and send you the price on WhatsApp.': 'हम आपका काम देखकर WhatsApp पर कीमत बताते हैं।',
+      'Make payment': 'पेमेंट करें',
+      'Confirm the order with a quick payment. No hidden charges.': 'पेमेंट करके ऑर्डर कन्फर्म करें। कोई छिपा चार्ज नहीं।',
+      'Receive your work': 'अपना काम पाएं',
+      'Your pages are delivered on the agreed date.': 'आपके पेज तय तारीख पर आपको मिल जाते हैं।',
+      'Why us': 'हमें क्यों चुनें',
+      'Careful work, clear communication': 'ध्यान से काम, साफ़ बातचीत',
+      'Clean, legible handwriting': 'साफ़, पढ़ने लायक लिखाई',
+      'Consistent writing, neat margins and properly labelled diagrams on every page.':
+        'हर पेज पर एक जैसी लिखाई, साफ़ मार्जिन और सही लेबल वाले डायग्राम।',
+      'Deadline first': 'डेडलाइन सबसे पहले',
+      'We confirm the delivery date with you before you pay.': 'पेमेंट से पहले डिलीवरी की तारीख आपके साथ तय करते हैं।',
+      'Pay only after a quote': 'कोटेशन के बाद ही पेमेंट',
+      "Asking for a quote is free. You pay only once you've seen and accepted the price.":
+        'कोटेशन पूछना फ्री है। कीमत देखकर और मंज़ूर करने के बाद ही पेमेंट करें।',
+      'Your files stay private': 'आपकी फाइलें सुरक्षित',
+      'Photos you send are used only to complete your order.':
+        'आपकी भेजी फोटो सिर्फ़ आपका ऑर्डर पूरा करने के लिए इस्तेमाल होती हैं।',
+      "Message us with photos of your task. We'll reply with a quote and a delivery date.":
+        'अपने काम की फोटो के साथ मैसेज करें। हम कीमत और डिलीवरी की तारीख बताएंगे।',
+      'Take photos in good light so every word is readable': 'अच्छी रोशनी में फोटो लें ताकि हर शब्द पढ़ा जा सके',
+      'Include a sample page if your college has a fixed format': 'अगर कॉलेज का फिक्स फॉर्मेट है तो एक सैंपल पेज भी भेजें',
+      'Mention page count, pen colour and any diagrams': 'पेज की संख्या, पेन का रंग और डायग्राम ज़रूर बताएं',
+      'What to send us': 'हमें क्या भेजें',
+      'Your name': 'आपका नाम',
+      'Type of work – fair copy, practical file, notes or project': 'काम का प्रकार – फेयर कॉपी, प्रैक्टिकल फाइल, नोट्स या प्रोजेक्ट',
+      'When you need it by': 'कब तक चाहिए',
+      'Page count, pen colour, diagrams': 'पेज, पेन का रंग, डायग्राम',
+      'Clear photos of your task': 'काम की साफ़ फोटो',
+      'Send on WhatsApp': 'WhatsApp पर भेजें',
+      "Free to ask. You'll receive a quote before any payment.": 'पूछना फ्री है। पेमेंट से पहले आपको कोटेशन मिलेगा।',
+      'Common questions': 'आम सवाल',
+      'How is the price decided?': 'कीमत कैसे तय होती है?',
+      "Pricing depends on the number of pages, diagrams and how soon you need it. Send us photos of your task on WhatsApp and we'll reply with an exact quote.":
+        'कीमत पेज की संख्या, डायग्राम और कितनी जल्दी चाहिए, इस पर निर्भर करती है। WhatsApp पर अपने काम की फोटो भेजें, हम सही कीमत बताएंगे।',
+      'How do I pay?': 'पेमेंट कैसे करें?',
+      'Once you accept the quote, you make the payment and your order is confirmed. Asking for a quote is completely free.':
+        'कोटेशन मंज़ूर करने के बाद पेमेंट करें और आपका ऑर्डर कन्फर्म हो जाएगा। कोटेशन पूछना बिल्कुल फ्री है।',
+      'How will I receive my work?': 'मुझे काम कैसे मिलेगा?',
+      "We'll agree on delivery when we send the quote – scanned copies on WhatsApp, local pickup, or courier to your address.":
+        'कोटेशन के समय डिलीवरी तय करेंगे – WhatsApp पर स्कैन कॉपी, खुद आकर ले जाना, या आपके पते पर कूरियर।',
+      'What if I need changes?': 'कुछ बदलाव चाहिए तो?',
+      "Tell us on WhatsApp. If something doesn't match the instructions you shared, we'll correct it.":
+        'WhatsApp पर बताएं। अगर कुछ आपकी दी हुई जानकारी से मेल नहीं खाता, तो हम उसे ठीक कर देंगे।',
+      'Is my information safe?': 'क्या मेरी जानकारी सुरक्षित है?',
+      'Your photos and details are used only to complete and deliver your order. We do not sell or publish them.':
+        'आपकी फोटो और जानकारी सिर्फ़ आपका ऑर्डर पूरा करने और डिलीवर करने के लिए इस्तेमाल होती है। हम इसे बेचते या पब्लिश नहीं करते।',
+      'Do you solve questions or write assignments?': 'क्या आप सवाल हल करते हैं या असाइनमेंट लिखते हैं?',
+      'No. We do not solve questions or create original academic work. We only rewrite, format and present content that you provide. You are responsible for making sure your use of our service follows the rules of your school, college or university.':
+        'नहीं। हम सवाल हल नहीं करते और न ही ओरिजिनल academic काम बनाते हैं। हम सिर्फ़ आपके दिए कंटेंट को दोबारा लिखते, फॉर्मेट और प्रेज़ेंट करते हैं। हमारी सर्विस का इस्तेमाल अपने स्कूल, कॉलेज या यूनिवर्सिटी के नियमों के अनुसार करना आपकी ज़िम्मेदारी है।',
+      'Deadline coming up?': 'डेडलाइन पास है?',
+      'Send your task now and get a quote on WhatsApp.': 'अभी अपना काम भेजें और WhatsApp पर कोटेशन पाएं।',
+      'Message us': 'मैसेज करें',
+      '. All rights reserved.': '. सर्वाधिकार सुरक्षित।',
+      'PenPilot Studio provides handwriting, copying and formatting services for content supplied by the customer. We do not solve questions or produce original academic work. Customers are responsible for following the academic rules of their institution. Users under 18 should order only with the consent of a parent or guardian.':
+        'PenPilot Studio ग्राहक द्वारा दिए गए कंटेंट की लिखाई, कॉपी और फॉर्मेटिंग की सर्विस देता है। हम सवाल हल नहीं करते और न ही ओरिजिनल academic काम बनाते हैं। अपने संस्थान के academic नियमों का पालन करना ग्राहक की ज़िम्मेदारी है। 18 साल से कम उम्र के यूज़र माता-पिता या अभिभावक की सहमति से ही ऑर्डर करें।'
+    };
+
+    const TEXT = {
+      en: {
+        title: `${CONFIG.brand} – Neat handwritten fair copies, notes & practical files`,
+        hi: 'Hi',
+        order: `Hi ${CONFIG.brand}, I'd like to place an order.\n\nName:\nType of work:\nNeeded by:\nDetails:\n\n(Attaching photos of my task)`
+      },
+      hi: {
+        title: `${CONFIG.brand} – फेयर कॉपी, नोट्स और प्रैक्टिकल फाइल, साफ़ हाथ की लिखाई में`,
+        hi: 'नमस्ते',
+        order: `नमस्ते ${CONFIG.brand}, मुझे ऑर्डर देना है।\n\nनाम:\nकाम का प्रकार:\nकब तक चाहिए:\nडिटेल्स:\n\n(काम की फोटो साथ में भेज रहे हैं)`
+      }
+    };
+
+    const waLink = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+
+    // Collect every translatable text node once, remembering its English text
+    const nodes = [];
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      const key = node.nodeValue.trim();
+      if (HI[key]) nodes.push({ node, key, en: node.nodeValue });
+    }
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      nodes.forEach(({ node, key, en }) => {
+        node.nodeValue = lang === 'hi' ? en.replace(key, HI[key]) : en;
+      });
+      document.title = TEXT[lang].title;
+      document.querySelectorAll('[data-wa]').forEach(el => el.href = waLink(TEXT[lang].hi));
+      document.querySelectorAll('[data-order]').forEach(el => el.href = waLink(TEXT[lang].order));
+      document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+
+    document.querySelectorAll('[data-brand]').forEach(el => el.textContent = CONFIG.brand);
+    document.querySelectorAll('.logo-mark').forEach(el => el.textContent = CONFIG.brand.charAt(0));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('footerPhone').textContent = CONFIG.whatsapp.replace(/^(\d{2})(\d{5})(\d{5})$/, '+$1 $2 $3');
+    document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+    let saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    setLang(saved || (navigator.language.startsWith('hi') ? 'hi' : 'en'));
+  </script>
+</body>
+</html>
