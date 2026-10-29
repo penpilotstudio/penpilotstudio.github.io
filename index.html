@@ -431,11 +431,20 @@
     .cta-band p { margin: 0; color: rgba(255, 255, 255, .75); }
 
     /* Footer */
-    .site-footer { padding: 40px 0; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
-    .site-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-    .site-footer a { text-decoration: none; }
-    .site-footer a:hover { color: var(--ink); }
-    .site-footer .disclaimer { flex-basis: 100%; margin: 12px 0 0; font-size: 12px; line-height: 1.6; }
+    .site-footer { background: var(--ink); color: rgba(255, 255, 255, .7); font-size: 15px; padding: 64px 0 0; }
+    .site-footer a { text-decoration: none; color: inherit; transition: color .2s; }
+    .site-footer a:hover { color: #fff; }
+    .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; padding-bottom: 48px; }
+    .footer-brand .logo { margin-bottom: 16px; }
+    .footer-brand p { margin: 0 0 24px; max-width: 360px; }
+    .footer-brand .btn { padding: 12px 20px; font-size: 15px; }
+    .site-footer h3 { margin: 0 0 16px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; }
+    html[lang="hi"] .site-footer h3 { font-size: 15px; letter-spacing: 0; }
+    .footer-links { list-style: none; margin: 0; padding: 0; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-bottom { border-top: 1px solid rgba(255, 255, 255, .12); padding: 24px 0 32px; }
+    .footer-bottom .disclaimer { margin: 0 0 16px; font-size: 13px; line-height: 1.7; color: rgba(255, 255, 255, .55); }
+    .footer-bottom .copy { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; }
 
     /* Floating WhatsApp */
     .wa-float {
@@ -466,6 +475,8 @@
       .hero p.lead { font-size: 17px; }
       .section-head h2, .order-info h2 { font-size: 28px; }
       .why { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
+      .footer-brand { grid-column: 1 / -1; }
       .cta-band { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
       .order-card { padding: 24px 18px; }
     }
@@ -500,7 +511,9 @@
       .cta-band .btn { width: 100%; }
       .faq details { padding: 0 16px; }
       .faq summary { padding: 16px 0; }
-      .site-footer { padding-bottom: 96px; }
+      .site-footer { padding-top: 48px; }
+      .footer-brand .btn { width: 100%; }
+      .footer-bottom { padding-bottom: 96px; }
       .wa-float { width: 52px; height: 52px; right: 16px; bottom: 16px; }
       .wa-float svg { width: 28px; height: 28px; }
     }
@@ -737,9 +750,37 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>© <span id="year"></span> <span data-brand>PenPilot Studio</span>. All rights reserved.</span>
-      <a data-wa="Hi" href="#" target="_blank" rel="noopener">WhatsApp: <span id="footerPhone"></span></a>
-      <p class="disclaimer">PenPilot Studio provides handwriting, copying and formatting services for content supplied by the customer. We do not solve questions or produce original academic work. Customers are responsible for following the academic rules of their institution. Users under 18 should order only with the consent of a parent or guardian.</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="#top"><span class="logo-mark">P</span><span data-brand>PenPilot Studio</span></a>
+          <p>Handwritten practical files, lab records, notes and fair copies – written neatly by hand from your content and delivered across India.</p>
+          <a class="btn btn-wa" data-order href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>Chat on WhatsApp</a>
+        </div>
+        <div>
+          <h3>Services</h3>
+          <ul class="footer-links">
+            <li><a href="#services">Practical files & lab records</a></li>
+            <li><a href="#services">Handwritten notes</a></li>
+            <li><a href="#services">Handwritten fair copies</a></li>
+            <li><a href="#services">Project files & PPTs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <ul class="footer-links">
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#order">Place an order</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="disclaimer">PenPilot Studio provides handwriting, copying and formatting services for content supplied by the customer. We do not solve questions or produce original academic work. Customers are responsible for following the academic rules of their institution. Users under 18 should order only with the consent of a parent or guardian.</p>
+        <div class="copy">
+          <span>© <span id="year"></span> <span data-brand>PenPilot Studio</span>. All rights reserved.</span>
+          <a href="#top">Back to top ↑</a>
+        </div>
+      </div>
     </div>
   </footer>
 
@@ -859,6 +900,11 @@
       'Deadline coming up?': 'डेडलाइन पास है?',
       'Send your task now and get a quote on WhatsApp.': 'अभी अपना काम भेजें और WhatsApp पर कोटेशन पाएं।',
       'Message us': 'मैसेज करें',
+      'Handwritten practical files, lab records, notes and fair copies – written neatly by hand from your content and delivered across India.':
+        'हाथ से लिखी प्रैक्टिकल फाइल, लैब रिकॉर्ड, नोट्स और फेयर कॉपी – आपके कंटेंट से साफ़ लिखाई में, पूरे भारत में डिलीवरी।',
+      'Chat on WhatsApp': 'WhatsApp पर बात करें',
+      'Quick links': 'ज़रूरी लिंक',
+      'Back to top ↑': 'ऊपर जाएं ↑',
       '. All rights reserved.': '. सर्वाधिकार सुरक्षित।',
       'PenPilot Studio provides handwriting, copying and formatting services for content supplied by the customer. We do not solve questions or produce original academic work. Customers are responsible for following the academic rules of their institution. Users under 18 should order only with the consent of a parent or guardian.':
         'PenPilot Studio ग्राहक द्वारा दिए गए कंटेंट की लिखाई, कॉपी और फॉर्मेटिंग की सर्विस देता है। हम सवाल हल नहीं करते और न ही ओरिजिनल academic काम बनाते हैं। अपने संस्थान के academic नियमों का पालन करना ग्राहक की ज़िम्मेदारी है। 18 साल से कम उम्र के यूज़र माता-पिता या अभिभावक की सहमति से ही ऑर्डर करें।'
@@ -902,9 +948,7 @@
 
     document.querySelectorAll('[data-brand]').forEach(el => el.textContent = CONFIG.brand);
     document.querySelectorAll('.logo-mark').forEach(el => el.textContent = CONFIG.brand.charAt(0));
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('footerPhone').textContent = CONFIG.whatsapp.replace(/^(\d{2})(\d{5})(\d{5})$/, '+$1 $2 $3');
-    document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+    document.getElementById('year').textContent = new Date().getFullYear();    document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
     // FAQ: smooth slide up / down instead of an instant jump
     document.querySelectorAll('.faq details').forEach(item => {
