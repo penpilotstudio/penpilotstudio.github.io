@@ -27,7 +27,8 @@
       --radius: 14px;
       --shadow: 0 10px 30px rgba(20, 33, 61, .08);
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :focus:not(:focus-visible) { outline: none; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
