@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://penpilotstudio.github.io/sitemap.xml
